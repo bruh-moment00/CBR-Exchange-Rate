@@ -7,6 +7,18 @@ namespace CBR_Exchange_Rate_App.API.Controllers
     [ApiController]
     public class ExchangeRateController : ControllerBase
     {
+        [Route("[controller]/currencies")]
+        [HttpGet]
+        public IActionResult GetCurrencies()
+        {
+            return null;
+        }
 
+        [Route("[controller]/currency/{id}")]
+        [HttpGet]
+        public IActionResult GetCurrencyById(int id)
+        {
+            return null;
+        }
     }
 }
