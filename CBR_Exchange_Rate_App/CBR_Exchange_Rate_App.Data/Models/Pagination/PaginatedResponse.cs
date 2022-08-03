@@ -1,21 +1,21 @@
-﻿using CBR_Exchange_Rate_App.Data.Models.Interfaces;
+﻿using CBR_Exchange_Rate_App.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CBR_Exchange_Rate_App.Domain.Pagination
+namespace CBR_Exchange_Rate_App.Domain.Models.Pagination
 {
-    public class PaginatedResponse<TSource>
+    public class PaginatedResponse
     {
         int PageSize { get; set; }
         int PageIndex { get; set; }
         int TotalCount { get; }
         int PagesCount { get; }
-        IResponse<TSource> Response { get; }
+        Response Response { get; }
 
-        public PaginatedResponse(int pageSize, int pageIndex, IResponse<TSource> response)
+        public PaginatedResponse(int pageSize, int pageIndex, Response response)
         {
             PageSize = pageSize;
             PageIndex = pageIndex;
