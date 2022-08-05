@@ -1,4 +1,5 @@
-﻿using CBR_Exchange_Rate_App.Data.Models;
+﻿using CBR_Exchange_Rate_App.Data.Models.ResponseObjects.Interfaces;
+using CBR_Exchange_Rate_App.Data.Models.Responses.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace CBR_Exchange_Rate_App.Domain.Models.Pagination
 {
-    public class PaginatedResponse
+    public class PaginatedData
     {
         int PageSize { get; set; }
         int PageIndex { get; set; }
         int TotalCount { get; }
         int PagesCount { get; }
-        Response Response { get; }
+        IEnumerable<IResponseObject> ExchangeRates { get; }
 
-        public PaginatedResponse(int pageSize, int pageIndex, Response response)
+        public PaginatedData(int pageSize, int pageIndex, IResponse response)
         {
             PageSize = pageSize;
             PageIndex = pageIndex;
-            Response = response;
+            ExchangeRates = response.GetResponseObjects();
             TotalCount = response.TotalCount;
             PagesCount = Convert.ToInt16(Math.Ceiling(Convert.ToDouble(TotalCount) / Convert.ToDouble(PageSize)));
         }
