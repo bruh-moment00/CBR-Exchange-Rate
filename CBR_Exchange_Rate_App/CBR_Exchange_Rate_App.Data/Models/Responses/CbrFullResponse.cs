@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace CBR_Exchange_Rate_App.Data.Models.Responses
 {
-    public class CbrFullResponse : IResponse
+    public class CbrFullResponse : IResponse<CbrExchangeRate>
     {
         DateTime Date { get; set; }
         DateTime PreviousDate { get; set; }
         string PreviousUrl { get; set; }
         DateTime TimeStamp { get; set; }
-        IDictionary<string, CbrResponseObject> Valute { get; set; }
+        IDictionary<string, CbrExchangeRate> Valute { get; set; }
         public int TotalCount { get; }
-        public CbrFullResponse(DateTime date, DateTime previousDate, string previousUrl, DateTime timeStamp, IDictionary<string, CbrResponseObject> valute)
+        public CbrFullResponse(DateTime date, DateTime previousDate, string previousUrl, DateTime timeStamp, IDictionary<string, CbrExchangeRate> valute)
         {
             Date = date;
             PreviousDate = previousDate;
@@ -27,9 +27,9 @@ namespace CBR_Exchange_Rate_App.Data.Models.Responses
             TotalCount = valute.Count;
         }
 
-        public IEnumerable<IResponseObject> GetResponseObjects()
+        public IEnumerable<CbrExchangeRate> GetResponseObjects()
         {
-            return Valute as IEnumerable<CbrResponseObject>;
+            return Valute as IEnumerable<CbrExchangeRate>;
         }
     }
 }

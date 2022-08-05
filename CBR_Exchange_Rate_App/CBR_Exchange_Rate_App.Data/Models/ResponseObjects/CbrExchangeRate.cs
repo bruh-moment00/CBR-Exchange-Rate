@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CBR_Exchange_Rate_App.Data.Models.ResponseObjects
 {
-    public class CbrResponseObject : IResponseObject
+    public class CbrExchangeRate : IExchangeRate
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string NumCode { get; set; }
         public string CharCode { get; set; }
         public int Nominal { get; set; }
@@ -17,7 +17,7 @@ namespace CBR_Exchange_Rate_App.Data.Models.ResponseObjects
         public double Value { get; set; }
         public double Previous { get; set; }
 
-        public CbrResponseObject(int id, string numCode, string charCode, int nominal, string name, double value, double previous)
+        public CbrExchangeRate(string id, string numCode, string charCode, int nominal, string name, double value, double previous)
         {
             Id = id;
             NumCode = numCode;

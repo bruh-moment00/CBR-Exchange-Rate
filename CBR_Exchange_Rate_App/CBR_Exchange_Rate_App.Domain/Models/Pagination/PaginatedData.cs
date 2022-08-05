@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace CBR_Exchange_Rate_App.Domain.Models.Pagination
 {
-    public class PaginatedData
+    public class PaginatedData<ExchangeRate>
     {
         int PageSize { get; set; }
         int PageIndex { get; set; }
         int TotalCount { get; }
         int PagesCount { get; }
-        IEnumerable<IResponseObject> ExchangeRates { get; }
+        IEnumerable<ExchangeRate> ExchangeRates { get; }
 
-        public PaginatedData(int pageSize, int pageIndex, IResponse response)
+        public PaginatedData(int pageSize, int pageIndex, IResponse<ExchangeRate> response)
         {
             PageSize = pageSize;
             PageIndex = pageIndex;
-            ExchangeRates = response.GetResponseObjects();
             TotalCount = response.TotalCount;
             PagesCount = Convert.ToInt16(Math.Ceiling(Convert.ToDouble(TotalCount) / Convert.ToDouble(PageSize)));
+            ExchangeRates = response.GetResponseObjects().Skip(PageIndex*PageSize).Take(PageSize);
         }
 
     }

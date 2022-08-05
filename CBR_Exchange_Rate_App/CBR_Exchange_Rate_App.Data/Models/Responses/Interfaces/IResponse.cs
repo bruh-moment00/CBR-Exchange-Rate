@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CBR_Exchange_Rate_App.Data.Models.Responses.Interfaces
 {
-    public interface IResponse
+    public interface IResponse<ExchangeRate>
     {
         int TotalCount { get; }
-        IEnumerable<IResponseObject> GetResponseObjects();
+        IEnumerable<ExchangeRate> GetResponseObjects();
     }
 }

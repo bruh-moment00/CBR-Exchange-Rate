@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace CBR_Exchange_Rate_App.Data.Models.ResponseObjects.Interfaces
 {
-    public interface IResponseObject
+    public interface IExchangeRate
     {
-        int Id { get; set; }
         string Name { get; set; }
         double Value { get; set; }
     }
