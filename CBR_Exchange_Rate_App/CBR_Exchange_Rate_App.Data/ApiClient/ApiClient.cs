@@ -11,7 +11,7 @@ namespace CBR_Exchange_Rate_App.Data.ApiClient
     public class ApiClient : IApiClient
     {
         private readonly string _apiUrl;
-        internal ApiClient(string apiUrl)
+        public ApiClient(string apiUrl)
         {
             _apiUrl = apiUrl;
         }
