@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Result2" Version="1.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CBR_Exchange_Rate_App.Domain\CBR_Exchange_Rate_App.Domain.csproj" />
   </ItemGroup>
 
 </Project>
