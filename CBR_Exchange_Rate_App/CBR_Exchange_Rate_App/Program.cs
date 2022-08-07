@@ -4,6 +4,7 @@ using CBR_Exchange_Rate_App.Data.ApiClient;
 using CBR_Exchange_Rate_App.Data.ApiClient.Interfaces;
 using CBR_Exchange_Rate_App.Data.Repositories.CBR;
 using CBR_Exchange_Rate_App.Domain.Services.CBR_Rate;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 var appConfig = builder.Configuration;

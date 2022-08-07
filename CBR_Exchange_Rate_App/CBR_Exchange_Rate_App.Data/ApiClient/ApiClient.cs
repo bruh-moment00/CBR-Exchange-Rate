@@ -1,5 +1,5 @@
 ﻿using CBR_Exchange_Rate_App.Data.ApiClient.Interfaces;
-using Leaf.xNet;
+//using Leaf.xNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +18,17 @@ namespace CBR_Exchange_Rate_App.Data.ApiClient
 
         string IApiClient.Get(string path)
         {
-            using (var request = new HttpRequest())
+            //using (var request = new HttpRequest())
+            //{
+            //    request.Get(/*_apiUrl + path*/"https://www.cbr-xml-daily.ru/daily_json.js");
+            //    HttpResponse httpResponse = request.Response;
+            //    return httpResponse.ToString();
+            //}
+            using (var httpClient = new HttpClient())
             {
-                request.UserAgent = Http.ChromeUserAgent();
-
-                HttpResponse httpResponse = request.Get(_apiUrl + path);
-                return httpResponse.ToString();
+                httpClient.BaseAddress = new Uri("https://www.cbr-xml-daily.ru/daily_json.js");
+                var result = httpClient.GetAsync("").Result;
+                return result.Content.ReadAsStringAsync().Result;
             }
         }
     }

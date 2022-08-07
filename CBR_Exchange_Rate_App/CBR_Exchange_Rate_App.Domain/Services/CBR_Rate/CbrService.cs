@@ -3,6 +3,7 @@ using CBR_Exchange_Rate_App.Data.Models.ResponseObjects.Interfaces;
 using CBR_Exchange_Rate_App.Data.Models.Responses;
 using CBR_Exchange_Rate_App.Data.Repositories.CBR;
 using CBR_Exchange_Rate_App.Domain.Models.Pagination;
+using Result2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +19,16 @@ namespace CBR_Exchange_Rate_App.Domain.Services.CBR_Rate
         {
             _cbrRepository = cbrRepository;
         }
-        public CbrExchangeRate ReturnExchangeRateById(string id)
+        public IResult<CbrExchangeRate> ReturnExchangeRateById(string id)
         {
             CbrFullResponse cbrExchangeRates = _cbrRepository.getDataFromApi();
-            return cbrExchangeRates.GetResponseObjects().Where(o => o.Id == id).FirstOrDefault();
+            return Result.Success(cbrExchangeRates.GetResponseObjects().Where(o => o.Id == id).FirstOrDefault()); 
         }
 
-        public PaginatedData<CbrExchangeRate> ReturnExchangeRatesPaginated(int pageSize = 5, int pageIndex = 1)
+        public IResult<IEnumerable<CbrExchangeRate>> ReturnExchangeRates()
         {
             CbrFullResponse cbrExchangeRates = _cbrRepository.getDataFromApi();
-            return new PaginatedData<CbrExchangeRate>(pageSize, pageIndex, cbrExchangeRates);
+            return Result.Success(cbrExchangeRates.GetResponseObjects());
         }
     }
 }

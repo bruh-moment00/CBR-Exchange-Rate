@@ -19,7 +19,8 @@ namespace CBR_Exchange_Rate_App.Data.Repositories.CBR
 
         public CbrFullResponse getDataFromApi()
         {
-            return JsonConvert.DeserializeObject<CbrFullResponse>(_apiClient.Get(""));
+            var result = _apiClient.Get("");
+            return JsonConvert.DeserializeObject<CbrFullResponse>(result);
         }
     }
 }

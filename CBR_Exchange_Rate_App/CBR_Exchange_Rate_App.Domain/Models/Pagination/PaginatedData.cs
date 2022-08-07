@@ -1,28 +1,25 @@
-﻿using CBR_Exchange_Rate_App.Data.Models.ResponseObjects.Interfaces;
-using CBR_Exchange_Rate_App.Data.Models.Responses.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CBR_Exchange_Rate_App.Domain.Models.Pagination
+﻿namespace CBR_Exchange_Rate_App.Domain.Models.Pagination
 {
-    public class PaginatedData<ExchangeRate>
+    public class Pagination<DataCollection>
     {
-        int PageSize { get; set; }
-        int PageIndex { get; set; }
-        int TotalCount { get; }
-        int PagesCount { get; }
-        IEnumerable<ExchangeRate> ExchangeRates { get; }
+        public int PageSize { get; set; }
+        public int PageIndex { get; set; }
+        public int TotalCount { get; private set; }
+        public int PagesCount { get; private set; }
+        public IEnumerable<DataCollection> Data { get; private set; }
 
-        public PaginatedData(int pageSize, int pageIndex, IResponse<ExchangeRate> response)
+        public Pagination(int pageSize, int pageIndex, IEnumerable<DataCollection> dataCollection)
         {
             PageSize = pageSize;
             PageIndex = pageIndex;
-            TotalCount = response.TotalCount;
+            TotalCount = dataCollection.Count();
             PagesCount = Convert.ToInt16(Math.Ceiling(Convert.ToDouble(TotalCount) / Convert.ToDouble(PageSize)));
-            ExchangeRates = response.GetResponseObjects().Skip(PageIndex*PageSize).Take(PageSize);
+            
+            Data = dataCollection.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+        }
+        public static Pagination<DataCollection> GetPaginatedData(IEnumerable<DataCollection> dataCollection, int pageSize, int pageIndex)
+        {
+            return new Pagination<DataCollection>(pageSize, pageIndex, dataCollection);
         }
 
     }

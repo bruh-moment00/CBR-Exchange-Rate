@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Result2" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CBR_Exchange_Rate_App.Data\CBR_Exchange_Rate_App.Data.csproj" />
   </ItemGroup>
 

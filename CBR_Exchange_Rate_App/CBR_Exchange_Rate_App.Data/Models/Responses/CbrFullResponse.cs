@@ -29,7 +29,7 @@ namespace CBR_Exchange_Rate_App.Data.Models.Responses
 
         public IEnumerable<CbrExchangeRate> GetResponseObjects()
         {
-            return Valute as IEnumerable<CbrExchangeRate>;
+            return Valute.Values;
         }
     }
 }
