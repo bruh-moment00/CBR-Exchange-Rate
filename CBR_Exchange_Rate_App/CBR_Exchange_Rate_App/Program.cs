@@ -2,7 +2,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using CBR_Exchange_Rate_App.Data.ApiClient;
 using CBR_Exchange_Rate_App.Data.ApiClient.Interfaces;
-using CBR_Exchange_Rate_App.Data.Repositories.CBR;
+using CBR_Exchange_Rate_App.Data.Currencies.Repositories.CBR;
 using CBR_Exchange_Rate_App.Domain.Services.CBR_Rate;
 using Newtonsoft.Json;
 
@@ -12,9 +12,9 @@ var appConfig = builder.Configuration;
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(builder =>
     {
-        builder.RegisterType<ApiClient>().As<IApiClient>().WithParameter("apiUrl", appConfig["APIs:CbrApiUrl"]);
+        builder.RegisterType<CbrApiClient>().As<IApiClient>().WithParameter("apiUrl", appConfig["APIs:CbrApiUrl"]);
         builder.RegisterType<CbrRepository>().As<ICbrRepository>();
-        builder.RegisterType<CbrService>().As<ICbrService>();
+        builder.RegisterType<CbrCurrenciesService>().As<ICbrCurrenciesService>();
     });
 // Add services to the container.
 

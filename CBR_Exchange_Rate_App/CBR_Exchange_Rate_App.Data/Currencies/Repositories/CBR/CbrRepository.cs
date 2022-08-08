@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using CBR_Exchange_Rate_App.Data.Models.Responses;
+using CBR_Exchange_Rate_App.Data.Currencies.Models.ResponseObjects;
 
-namespace CBR_Exchange_Rate_App.Data.Repositories.CBR
+namespace CBR_Exchange_Rate_App.Data.Currencies.Repositories.CBR
 {
     public class CbrRepository : ICbrRepository
     {
@@ -17,10 +17,10 @@ namespace CBR_Exchange_Rate_App.Data.Repositories.CBR
             _apiClient = apiClient;
         }
 
-        public CbrFullResponse getDataFromApi()
+        public CbrApiCurrenciesResponse getDataFromApi()
         {
             var result = _apiClient.Get("");
-            return JsonConvert.DeserializeObject<CbrFullResponse>(result);
+            return JsonConvert.DeserializeObject<CbrApiCurrenciesResponse>(result);
         }
     }
 }

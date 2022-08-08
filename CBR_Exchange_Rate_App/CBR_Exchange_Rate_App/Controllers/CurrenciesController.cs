@@ -1,9 +1,8 @@
-﻿using CBR_Exchange_Rate_App.Data.Models.ResponseObjects;
-using CBR_Exchange_Rate_App.Domain.Models.Pagination;
-using CBR_Exchange_Rate_App.Domain.Services.CBR_Rate;
+﻿using CBR_Exchange_Rate_App.Domain.Services.CBR_Rate;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 using Result2;
+using CBR_Exchange_Rate_App.Data.Currencies.Models.CurrencyObjects;
+using CBR_Exchange_Rate_App.Domain.Pagination.Models;
 
 namespace CBR_Exchange_Rate_App.API.Controllers
 {
@@ -11,8 +10,8 @@ namespace CBR_Exchange_Rate_App.API.Controllers
     [ApiController]
     public class ExchangeRateController : ControllerBase
     {
-        private readonly ICbrService _cbrService;
-        public ExchangeRateController(ICbrService cbrService)
+        private readonly ICbrCurrenciesService _cbrService;
+        public ExchangeRateController(ICbrCurrenciesService cbrService)
         {
             _cbrService = cbrService;
         }
@@ -21,28 +20,18 @@ namespace CBR_Exchange_Rate_App.API.Controllers
         [HttpGet]
         public IActionResult GetCurrencies(int pageSize = 5, int pageIndex = 1)
         {
-            IResult<IEnumerable<CbrExchangeRate>> result = _cbrService.ReturnExchangeRates();
+            IResult<IEnumerable<CbrCurrency>> result = _cbrService.ReturnCurrencies();
 
             JsonResult jsonResult;
 
             if (result.Ok)
             {
-                //IEnumerable<CbrExchangeRate> values = result.Value.ReturnExchangeRates();
-                jsonResult = new JsonResult(Pagination<CbrExchangeRate>.GetPaginatedData(result.Value, pageSize, pageIndex));
+                jsonResult = new JsonResult(Pagination<CbrCurrency>.GetPaginatedData(result.Value, pageSize, pageIndex));
             }
             else
             {
                 jsonResult = new JsonResult(result.Reason);
             }
-
-            //JsonResult jsonResult = new JsonResult(new PaginatedData<CbrExchangeRate>(5, 1,
-            //    new CbrFullResponse(DateTime.Now, DateTime.UtcNow, "bruh", DateTime.Now, new Dictionary<string, CbrExchangeRate>()
-            //    {
-            //        {
-            //            "asd", new CbrExchangeRate("RWWW", "ASD", "ASD", 2, "ASD", 4, 5)
-            //        }
-
-            //    })));
             return jsonResult;
 
         }
@@ -51,7 +40,7 @@ namespace CBR_Exchange_Rate_App.API.Controllers
         [HttpGet]
         public IActionResult GetCurrencyById(string id)
         {
-            IResult<CbrExchangeRate> result = _cbrService.ReturnExchangeRateById(id);
+            IResult<CbrCurrency> result = _cbrService.ReturnCurrencyById(id);
 
             JsonResult jsonResult;
 

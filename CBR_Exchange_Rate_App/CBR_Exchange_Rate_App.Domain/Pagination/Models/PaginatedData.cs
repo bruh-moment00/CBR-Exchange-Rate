@@ -1,4 +1,4 @@
-﻿namespace CBR_Exchange_Rate_App.Domain.Models.Pagination
+﻿namespace CBR_Exchange_Rate_App.Domain.Pagination.Models
 {
     public class Pagination<DataCollection>
     {
@@ -14,7 +14,7 @@
             PageIndex = pageIndex;
             TotalCount = dataCollection.Count();
             PagesCount = Convert.ToInt16(Math.Ceiling(Convert.ToDouble(TotalCount) / Convert.ToDouble(PageSize)));
-            
+
             Data = dataCollection.Skip((PageIndex - 1) * PageSize).Take(PageSize);
         }
         public static Pagination<DataCollection> GetPaginatedData(IEnumerable<DataCollection> dataCollection, int pageSize, int pageIndex)

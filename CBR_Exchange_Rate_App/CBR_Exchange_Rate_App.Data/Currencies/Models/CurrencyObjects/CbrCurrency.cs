@@ -1,13 +1,13 @@
-﻿using CBR_Exchange_Rate_App.Data.Models.ResponseObjects.Interfaces;
+﻿using CBR_Exchange_Rate_App.Data.Currencies.Models.CurrencyObjects.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CBR_Exchange_Rate_App.Data.Models.ResponseObjects
+namespace CBR_Exchange_Rate_App.Data.Currencies.Models.CurrencyObjects
 {
-    public class CbrExchangeRate : IExchangeRate
+    public class CbrCurrency : ICurrency
     {
         public string Id { get; set; }
         public string NumCode { get; set; }
@@ -17,7 +17,7 @@ namespace CBR_Exchange_Rate_App.Data.Models.ResponseObjects
         public double Value { get; set; }
         public double Previous { get; set; }
 
-        public CbrExchangeRate(string id, string numCode, string charCode, int nominal, string name, double value, double previous)
+        public CbrCurrency(string id, string numCode, string charCode, int nominal, string name, double value, double previous)
         {
             Id = id;
             NumCode = numCode;
